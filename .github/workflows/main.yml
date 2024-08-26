@@ -9,7 +9,7 @@ on:
       version:
         description: 'Neko version'
         required: true
-        default: '1.1.11-beta'
+        default: '1.2.0-beta'
         type: string
       changelog:
         description: 'Changelog'
@@ -27,7 +27,7 @@ jobs:
       fail-fast: false
       matrix:
         release:
-          - 21.02.7
+          - 23.05.4
         arch:
           - x86_64
           - arm_cortex-a7_neon-vfpv4
@@ -61,7 +61,7 @@ jobs:
           ARCH: ${{ matrix.arch }}-${{ matrix.release }}
           ARTIFACTS_DIR: ${{ github.workspace }}/artifacts
           FEED_DIR: ${{ github.workspace }}/feeds
-          PACKAGES: luci-app-neko
+          PACKAGES: mihomo luci-app-neko
           NO_SHFMT_CHECK: 1
         
       - name: Delivering Package
@@ -84,13 +84,13 @@ jobs:
         shell: bash
         run: |
           mkdir ./release
-          cp -rf ./neko-21.02.7_x86_64/luci-app* ./release/luci-app-neko_${{ inputs.version }}_all.ipk
+          cp -rf ./neko-23.05.4_x86_64/luci-app* ./release/luci-app-neko_${{ inputs.version }}_all.ipk
           
-          cp -rf ./neko-21.02.7_x86_64/mihomo* ./release/
-          cp -rf ./neko-21.02.7_arm_cortex-a7_neon-vfpv4/mihomo* ./release/
-          cp -rf ./neko-21.02.7_aarch64_generic/mihomo* ./release/
-          cp -rf ./neko-21.02.7_aarch64_cortex-a53/mihomo* ./release/
-          cp -rf ./neko-21.02.7_aarch64_cortex-a72/mihomo* ./release/
+          cp -rf ./neko-23.05.4_x86_64/mihomo* ./release/
+          cp -rf ./neko-23.05.4_arm_cortex-a7_neon-vfpv4/mihomo* ./release/
+          cp -rf ./neko-23.05.4_aarch64_generic/mihomo* ./release/
+          cp -rf ./neko-23.05.4_aarch64_cortex-a53/mihomo* ./release/
+          cp -rf ./neko-23.05.4_aarch64_cortex-a72/mihomo* ./release/
         
       - name: Upload release asset
         uses: svenstaro/upload-release-action@v2
