@@ -13,18 +13,35 @@
   Mihomo based Proxy
 </p>
 
-Packages list
----
-| Packages | Version | Arch | Information |
-|---|---|---|---|
-| [luci-app-neko](https://github.com/nosignals/openwrt-neko/tree/main/luci-app-neko) | ` 1.2.0-beta ` | <div align="center"> [all-generic](https://github.com/nosignals/neko/tree/luci-app-neko) </div> | Include `geosite` and `geoip` files |
-| [mihomo](https://github.com/nosignals/openwrt-neko/tree/main/mihomo) | ` 1.18.7-1 ` | <div align="center"> [x86](https://github.com/nosignals/neko/tree/luci-app-neko)</br>[aarch64-generic](https://github.com/nosignals/neko/tree/luci-app-neko) </div> | Stable version on [MetaCubeXD](https://github.com/MetaCubeX/mihomo/) |
-
 Features
 ---
 - your Own Custom Theme based Bootstrap ` nekoclash/assets/theme `
 - Configs, Proxy, and Rules can edit on webui
 - xray/v2ray config converter
+
+Packages list
+---
+| Packages | Version | Arch | Information |
+|---|---|---|---|
+| [luci-app-neko](https://github.com/nosignals/openwrt-neko/tree/main/luci-app-neko) | ` 1.2.0-beta ` | <div align="center"> [all-generic](https://github.com/nosignals/neko/tree/luci-app-neko) </div> | Include `geosite` and `geoip` files |
+| [mihomo](https://github.com/nosignals/openwrt-neko/tree/main/mihomo) | ` 1.18.7-1 ` | <div align="center"> [x86](https://github.com/nosignals/neko/tree/luci-app-neko)</br>[aarch64-generic](https://github.com/nosignals/neko/tree/luci-app-neko) </div> | Latest stable version on [MetaCubeXD](https://github.com/MetaCubeX/mihomo/) |
+| ? | ? | ? | ? |
+
+Compiling
+---
+#### 1. Add feeds
+```bash
+echo "src-git neko https://github.com/nosignals/openwrt-neko.git;main" >> "feeds.conf.default"
+```
+#### 2. Update & Install feeds
+```bash
+./scripts/feeds update -a
+./scripts/feeds install -a
+```
+#### 3. Make Packages
+```bash
+make package/luci-app-neko/compile
+```
 
 About
 ---
