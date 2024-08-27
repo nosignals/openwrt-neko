@@ -7,8 +7,7 @@ neko_tmp_dir="$neko_dir/tmp"
 neko_core="$neko_dir/core"
 neko_bin="/usr/bin/mihomo"
 neko_www="/www/nekoclash"
-neko_cfg=`uci -q get neko.cfg.selected_config`
-neko_config=`cat $neko_cfg`
+neko_config=`uci -q get neko.cfg.selected_config`
 
 php_bin="/usr/bin/php"
 php_address="0.0.0.0"
