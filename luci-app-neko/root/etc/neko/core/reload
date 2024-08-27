@@ -5,9 +5,10 @@
 neko_status=$(uci -q get neko.cfg.enabled)
 neko_new_interface=$(uci -q get neko.cfg.new_interface)
 neko_delay=$(uci -q get neko.cfg.delay)
-tun_bin="/etc/neko/core/tun"
-neko_pid="/etc/neko/tmp/neko_pid.txt"
-log="/etc/neko/tmp/log.txt"
+neko_dir="/etc/neko"
+tun_bin="$neko_dir/core/tun"
+neko_pid="$neko_dir/tmp/neko_pid.txt"
+log="$neko_dir/tmp/log.txt"
 firewall="/etc/init.d/firewall"
 neko_version=$1
 
@@ -52,7 +53,9 @@ neko_reload(){
         
             if (( $uptime < $last_uptime )) || [ -z $last_uptime ]; then
                 echo "reloading firewall"
+                $firewall restart
                 echo "[ `date +%T` ] - Detected interfaces $iface changed, Reloading Firewall " >> $log
+                sleep 1
                 $tun_bin -ks
             else
                 echo "nothing"
