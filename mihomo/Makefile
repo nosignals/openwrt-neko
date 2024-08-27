@@ -37,15 +37,11 @@ endef
 
 define Package/$(PKG_NAME)/install
 	$(call GoPackage/Package/Install/Bin,$(1))
-	$(INSTALL_DIR) $(1)/etc/uci-defaults/
-  
-	$(CP) $(PKG_BUILD_DIR)/files/99_mihomo $(1)/etc/uci-defaults/
 endef
 
 define Build/Prepare
 	$(Build/Prepare/Default)
 	$(RM) -r $(PKG_BUILD_DIR)/rules/logic_test
-	$(CP) $(CURDIR)/files $(PKG_BUILD_DIR)
 endef
 
 $(eval $(call GoBinPackage,$(PKG_NAME)))
