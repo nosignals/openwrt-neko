@@ -82,7 +82,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./release/*
           overwrite: true
-          tag: ${{ inputs.version }}
+          tag: mihomo_${{ inputs.version }}
           file_glob: true
           body: |
             # MIHOMO KERNEL ${{ inputs.version }}

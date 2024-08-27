@@ -88,7 +88,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./release/*
           overwrite: true
-          tag: ${{ inputs.version }}
+          tag: luci-app-neko_${{ inputs.version }}
           file_glob: true
           body: |
             # LUCI APP NEKO ${{ inputs.version }}
