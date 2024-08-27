@@ -1,0 +1,94 @@
+#
+# Copyright (C) 2024 nosignals
+#
+name: Building Mihomo Kernel
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Neko version'
+        required: true
+        default: '1.18.7'
+        type: string
+jobs: 
+  build_ipk:
+    permissions:
+      contents: write
+    name: Build Neko
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        release:
+          - 23.05.4
+        arch:
+          - x86_64
+          - arm_cortex-a7_neon-vfpv4
+          - aarch64_cortex-a53
+          - aarch64_cortex-a72
+          - aarch64_generic
+          
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          ref: main
+        
+      - name: Preparing Neko
+        run: |
+              echo ""
+              mkdir feeds artifacts
+              cp -rf ./mihomo ./feeds
+        
+      - name: Building Luci Neko
+        uses: nosignals/gh-action-sdk@main
+        env:
+          ARCH: ${{ matrix.arch }}-${{ matrix.release }}
+          ARTIFACTS_DIR: ${{ github.workspace }}/artifacts
+          FEED_DIR: ${{ github.workspace }}/feeds
+          PACKAGES: mihomo
+          NO_SHFMT_CHECK: 1
+        
+      - name: Delivering Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: neko-${{ matrix.release }}_${{ matrix.arch }}
+          path: ${{ github.workspace }}/artifacts/bin/packages/${{ matrix.arch }}/action/mihomo*
+
+  push_packages:
+    needs: build_ipk
+    name: Push Packages to Release
+    permissions:
+      contents: write  # To push a branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download temporary artifact
+        uses: actions/download-artifact@v3
+        
+      - name: Moving artifact to releases
+        shell: bash
+        run: |
+          mkdir ./release
+          cp -rf ./neko-23.05.4_x86_64/mihomo* ./release/
+          cp -rf ./neko-23.05.4_arm_cortex-a7_neon-vfpv4/mihomo* ./release/
+          cp -rf ./neko-23.05.4_aarch64_generic/mihomo* ./release/
+          cp -rf ./neko-23.05.4_aarch64_cortex-a53/mihomo* ./release/
+          cp -rf ./neko-23.05.4_aarch64_cortex-a72/mihomo* ./release/
+        
+      - name: Upload release asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./release/*
+          overwrite: true
+          tag: ${{ inputs.version }}
+          file_glob: true
+          body: |
+            # MIHOMO KERNEL ${{ inputs.version }}
+            Another Mihomo Kernel.
+            ### Information
+            - Changelog : [v${{ inputs.version }}](https://github.com/MetaCubeX/mihomo/releases/tag/v${{ inputs.version }})
+            - Wiki : [wiki.metacubex.one](https://wiki.metacubex.one)
+            ### Dependency Requirement
+            - ` ca-bundle, ip-full, kmod-tun `
