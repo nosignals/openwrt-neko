@@ -2,9 +2,7 @@
 
 include './cfg.php';
 
-
 $themeDir = "$neko_www/assets/theme";
-$tmpPath = "$neko_www/lib/selected_config.txt";
 $arrFiles = array();
 $arrFiles = glob("$themeDir/*.css");
 
@@ -85,15 +83,21 @@ $fwstatus=shell_exec("uci get neko.cfg.new_interface");
                         </form>
                     </tr>
                     <tr>
-                        <td class="col-2">Client Version</td>
+                        <td class="col-1">Client Version</td>
                         <td class="col-4">
                             <div class="form-control text-center" id="cliver">-</div>
                         </td>
+                        <td class="col-1">
+                            <a class="btn btn-danger col-10" target="_blank" href="https://github.com/nosignals/openwrt-neko/releases">Update</a>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="col-2">Core Version</td>
+                        <td class="col-1">Core Version</td>
                         <td class="col-4">
                             <div class="form-control text-center" id="corever">-</div>
+                        </td>
+                        <td class="col-1">
+                            <a class="btn btn-danger col-10" target="_blank" href="https://github.com/nosignals/openwrt-neko/releases">Update</a>
                         </td>
                     </tr>
                 </tbody>
@@ -107,26 +111,6 @@ $fwstatus=shell_exec("uci get neko.cfg.new_interface");
                 <p>NekoClash is a family friendly Clash Proxy tool, this tool makes it easy for users to use Clash Proxy, and User can modify your own Theme based Bootstrap, inspired by OpenClash Tools. NekoClash has writen by PHP, and BASH.</p>
                 <p>This tool aims to make it easier to use Clash Proxy</p>
                 <p>If you have questions or feedback about NekoClash you can contact me on the <b>DBAI Discord Server</b> link below</p>
-                <table class="table table-borderless callout mb-5">
-                    <tbody>
-                        <tr class="text-center">
-                            <td>Script</td>
-                            <td>GUI</td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>NOSIGNAL</td>
-                            <td>NOSIGNAL</td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>Theme</td>
-                            <td>Clash</td>
-                        </tr>
-                        <tr class="text-center">
-                            <td><a class="btn btn-outline-secondary col-10" target="_blank" href="https://getbootstrap.com">BOOTSTRAP</a></td>
-                            <td><a class="btn btn-outline-secondary col-10" target="_blank" href="https://github.com/MetaCubeX">METACUBEX</a></td>
-                        </tr>
-                    </tbody>
-                </table>
                 <h5 class="mb-3">External Links</h5>
                 <table class="table table-borderless callout mb-5">
                     <tbody>
