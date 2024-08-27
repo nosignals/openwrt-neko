@@ -30,10 +30,6 @@ jobs:
           - 23.05.4
         arch:
           - x86_64
-          - arm_cortex-a7_neon-vfpv4
-          - aarch64_cortex-a53
-          - aarch64_cortex-a72
-          - aarch64_generic
           
     steps:
       - name: Checkout Repository
@@ -55,7 +51,7 @@ jobs:
               cp -rf ./luci-app-neko ./feeds
               cp -rf ./mihomo ./feeds
         
-      - name: Building Luci Neko
+      - name: Building luci-app-neko
         uses: nosignals/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.release }}
@@ -68,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: neko-${{ matrix.release }}_${{ matrix.arch }}
-          path: ${{ github.workspace }}/artifacts/bin/packages/${{ matrix.arch }}/action/*
+          path: ${{ github.workspace }}/artifacts/bin/packages/${{ matrix.arch }}/action/luci-app*
 
   push_packages:
     needs: build_ipk
@@ -85,12 +81,6 @@ jobs:
         run: |
           mkdir ./release
           cp -rf ./neko-23.05.4_x86_64/luci-app* ./release/luci-app-neko_${{ inputs.version }}_all.ipk
-          
-          cp -rf ./neko-23.05.4_x86_64/mihomo* ./release/
-          cp -rf ./neko-23.05.4_arm_cortex-a7_neon-vfpv4/mihomo* ./release/
-          cp -rf ./neko-23.05.4_aarch64_generic/mihomo* ./release/
-          cp -rf ./neko-23.05.4_aarch64_cortex-a53/mihomo* ./release/
-          cp -rf ./neko-23.05.4_aarch64_cortex-a72/mihomo* ./release/
         
       - name: Upload release asset
         uses: svenstaro/upload-release-action@v2

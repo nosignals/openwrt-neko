@@ -41,7 +41,7 @@ jobs:
               mkdir feeds artifacts
               cp -rf ./mihomo ./feeds
         
-      - name: Building Luci Neko
+      - name: Building Mihomo kernel Packages
         uses: nosignals/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.release }}
