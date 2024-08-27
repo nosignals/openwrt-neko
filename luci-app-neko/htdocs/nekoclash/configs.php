@@ -2,13 +2,12 @@
 include './cfg.php';
 
 $dirPath = "$neko_dir/config";
-$tmpPath = "$neko_www/lib/selected_config.txt";
 $arrFiles = array();
 $arrFiles = glob("$dirPath/*.yaml");
 
 if(isset($_POST['clashconfig'])){
     $dt = $_POST['clashconfig'];
-    shell_exec("echo $dt > $tmpPath");
+    shell_exec("uci set neko.cfg.selected_config='$dt' && uci commit neko");
     $selected_config = $dt;
 }
 if(isset($_POST['neko'])){
