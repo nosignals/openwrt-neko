@@ -87,7 +87,7 @@ endef
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/etc/neko
-	$(INSTALL_DIR) $(1)/www/nekoclash
+	$(INSTALL_DIR) $(1)/www
 	$(CP) $(PKG_BUILD_DIR)/root/* $(1)/
 	$(CP) $(PKG_BUILD_DIR)/htdocs/* $(1)/www/
 endef
