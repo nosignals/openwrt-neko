@@ -79,6 +79,9 @@ include './cfg.php';
                 <li class="nav-item">
                     <a class="col btn btn-lg" data-bs-toggle="tab" href="#converter">Converter</a>
                 </li>
+                <li class="nav-item">
+                    <a class="col btn btn-lg" data-bs-toggle="tab" href="#manager">Manager</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div id="info" class="tab-pane fade show active">
@@ -156,6 +159,12 @@ include './cfg.php';
                     <h2 class="text-center p-2 mb-5">YAML Converter</h2>
                     <div class="container h-100">
                         <iframe class="rounded-4 w-100" scrolling="no" height="700" src="./yamlconv.php" title="yacd" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div id="manager" class="tab-pane fade">
+                    <h2 class="text-center p-2 mb-5">Config File Manager</h2>
+                    <div class="container h-100">
+                        <iframe class="rounded-4 w-100 mb-5" height="700" src="./manager.php" title="yacd" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>

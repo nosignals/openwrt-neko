@@ -258,6 +258,21 @@ php_stop(){
     fi
 }
 
+neko_backup(){
+    cd $neko_dir
+    filename="neko_backup_`date +%F_%H%M%S`.tar.gz"
+    tar -czvf $filename config proxy_provider rule_provider
+    mv $filename /tmp/$filename
+}
+neko_restore(){
+    cd $neko_dir
+    rm -r $neko_dir/config/*
+    rm -r $neko_dir/proxy_provider/*
+    rm -r $neko_dir/rule_provider/*
+    tar -xzf *.tar.gz
+    rm -r *.tar.gz
+}
+
 cleanup(){
     logs "Cleanup Temporary..." 2
     neko_stop
@@ -265,7 +280,7 @@ cleanup(){
     logs "Cleanup Done..."
 }
 
-while getopts ":skrpcvh" signal ; do
+while getopts ":skrpcvhbx" signal ; do
     case $signal in
         s)
             neko_start
@@ -281,6 +296,12 @@ while getopts ":skrpcvh" signal ; do
             ;;
         c)
             cleanup
+            ;;
+        b)
+            neko_backup
+            ;;
+        x)
+            neko_restore
             ;;
         v)
             neko_ver
