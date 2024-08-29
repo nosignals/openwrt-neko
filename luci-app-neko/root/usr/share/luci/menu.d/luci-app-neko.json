@@ -1,0 +1,12 @@
+{
+	"admin/services/neko": {
+		"title": "Neko",
+		"action": {
+			"type": "view",
+			"path": "neko"
+		},
+		"depends": {
+			"acl": [ "luci-app-neko" ]
+		}
+	}
+}
