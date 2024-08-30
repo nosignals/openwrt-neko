@@ -44,23 +44,21 @@ function create_modal($path) {
     $out_modal .= "              <h5 class=\"modal-title\" id=\"modal_".$file_dir."_".$file_name[0]."\">File Information</h5>\n";
     $out_modal .= "              <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n";
     $out_modal .= "            </div>\n";
+    $out_modal .= "            <form action=\"manager.php\" method=\"post\">\n";
     $out_modal .= "            <div class=\"modal-body\">\n";
     $out_modal .= "              <a>Name : ".$file_info[4]."</a></br>\n";
     $out_modal .= "              <a>File Size : ".formatSize(filesize($file))."</a></br>\n";
     $out_modal .= "              <a>Last Modified : ".date('Y-m-d H:i:s', ((7*3600)+filemtime($file)))."</a></br>\n";
     $out_modal .= "              <div class=\"col input-group mb-3 justify-content-md-center\">\n";
-    $out_modal .= "                <textarea class=\"form-control\" name=\"datax\" rows=\"15\">".shell_exec("cat $file")."</textarea>\n";
+    $out_modal .= "                <textarea class=\"form-control\" name=\"form_".$file_dir."_".$file_name[0]."\" rows=\"15\">".shell_exec("cat $file")."</textarea>\n";
     $out_modal .= "              </div>\n";
     $out_modal .= "            </div>\n";
     $out_modal .= "            <div class=\"modal-footer\">\n";
-    $out_modal .= "              <form action=\"manager.php\" method=\"post\">\n";
-    $out_modal .= "                <button type=\"submit\" name=\"file_action\" value=\"del@".$file."\" class=\"btn btn-danger d-grid\"><i class=\"fa fa-trash\"></i>Delete</button>\n";
-    $out_modal .= "              </form>\n";
-    $out_modal .= "              <form action=\"manager.php\" method=\"post\">\n";
-    $out_modal .= "                <button type=\"submit\" name=\"file_save\" value=\"del@".$file."\" class=\"btn btn-success d-grid\"><i class=\"fa fa-floppy-o\"></i>Save</button>\n";
-    $out_modal .= "              </form>\n";
+    $out_modal .= "              <button type=\"submit\" name=\"file_action\" value=\"del@".$file."\" class=\"btn btn-danger d-grid\"><i class=\"fa fa-trash\"></i>Delete</button>\n";
+    $out_modal .= "              <button type=\"submit\" name=\"file_action\" value=\"save@".$file."\" class=\"btn btn-success d-grid\"><i class=\"fa fa-floppy-o\"></i>Save</button>\n";
     $out_modal .= "              <button type=\"button\" class=\"btn btn-secondary d-grid\" data-bs-dismiss=\"modal\"><i class=\"fa fa-times\"></i>Close</button>\n";
     $out_modal .= "            </div>\n";
+    $out_modal .= "              </form>\n";
     $out_modal .= "          </div>\n";
     $out_modal .= "        </div>\n";
     $out_modal .= "      </div>\n";
@@ -107,8 +105,16 @@ function action_controller($action_str) {
   $file_info = explode("/", $file_path);
   switch ($action[0]) {
     case "del":
-      echo "File <b>".$file_info[4]."</b> from directory <b>".$file_info[3]."</b> has ben deleted";
+      echo "File <b>".$file_info[4]."</b> from directory <b>".$file_info[3]."</b> has ben <b>deleted</b>";
       shell_exec("rm -r $file_path");
+      break;
+    case "save":
+      $dir = $file_info[3];
+      $filename = explode(".", $file_info[4]);
+      $formname = "form_".$dir."_".$filename[0];
+      $form = $_POST[$formname];
+      shell_exec("echo \"$form\" > $file_path");
+      echo "File <b>".$file_info[4]."</b> from directory <b>".$dir."</b> has ben <b>saved</b>";
       break;
     case "ren":
       echo $action[0]." - ".$file_path;
@@ -234,9 +240,9 @@ function restoreConfig(){
         create_modal($rule_path);
         ?>
       </div>
-    <div class="container-bg text-center">
+    <div class="container-bg text-center"></br>
         <form action="manager.php" method="post" enctype="multipart/form-data">
-        <div class="container container-bg border border-3 rounded-4 col-12 mb-4">
+        <div class="container container-bg border border-3 rounded-4 col-12 mb-4"></br>
           <h3>Upload & Backup file</h3>
           <a><?php
               if(isset($_POST["path_selector"])) {
@@ -274,7 +280,7 @@ function restoreConfig(){
           <a>Backup is include of directory <b>configs, proxy_provider,</b> and<b> rule_provider.</b></a></br></br>
           </div>
       </form></br>
-      <div class="container container-bg border border-3 rounded-4 col-12 mb-4">
+      <div class="container container-bg border border-3 rounded-4 col-12 mb-4"></br>
       <h3>Config files</h3>
       <table class="table table-borderless">
         <tbody>
@@ -288,7 +294,7 @@ function restoreConfig(){
         </tbody>
       </table>
       </div>
-      <div class="container container-bg border border-3 rounded-4 col-12 mb-4">
+      <div class="container container-bg border border-3 rounded-4 col-12 mb-4"></br>
       <h3>Proxy Provider files</h3>
       <table class="table table-borderless">
         <tbody>
@@ -302,7 +308,7 @@ function restoreConfig(){
         </tbody>
       </table>
       </div>
-      <div class="container container-bg border border-3 rounded-4 col-12 mb-4">
+      <div class="container container-bg border border-3 rounded-4 col-12 mb-4"></br>
       <h3>Rules Provider files</h3>
       <table class="table table-borderless">
         <tbody>
