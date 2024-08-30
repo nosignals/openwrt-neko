@@ -199,6 +199,7 @@ function backupConfig(){
   }
   ob_clean();
   flush();
+  sleep (2);
   readfile($file_path);
   shell_exec("rm -r $file_path");
   exit;
