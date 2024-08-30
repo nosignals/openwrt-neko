@@ -35,17 +35,23 @@ dns:
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - '*.lan'
-  listen: 127.0.0.1:5053
+  #listen: 127.0.0.1:5053
   default-nameserver:
-    - 8.8.8.8
+    - 9.9.9.9
+    - 149.112.112.112
     - 1.1.1.1
+    - 8.8.8.8
   nameserver:
-    - 'tls://dns.google#proxy'
-  fallback:
-    - tls://8.8.4.4
-    - tls://1.1.1.1
-  proxy-server-nameserver:
-    - https://1.1.1.1/dns-query
+    - https://dns.quad9.net/dns-query
+    - tls://dns.quad9.net
+    - 9.9.9.9
+    - 1.1.1.1
+    - 8.8.8.8
+    - 149.112.112.112
+    - https://dns.adguard.com/dns-query
+    - https://dns-google.com/dns-query
+    - tls://dns.adguard.com
+    - tls://dns-google.com
   fallback-filter:
     geoip: false
     ipcidr:
