@@ -6,6 +6,16 @@ $themeDir = "$neko_www/assets/theme";
 $arrFiles = array();
 $arrFiles = glob("$themeDir/*.css");
 
+$neko_version = exec("opkg list-installed | grep luci-app-neko | cut -d ' - ' -f3");
+$neko_latest = exec("curl -m 5 -f -s https://raw.githubusercontent.com/nosignals/openwrt-neko/main/luci-app-neko/Makefile | grep PKG_VERSION: | cut -d= -f2");
+$stat = 0;
+if ($neko_version == $neko_latest){
+    $stat = 0;
+}
+else {
+    $stat = 1;
+}
+
 for($x=0;$x<count($arrFiles);$x++) $arrFiles[$x] = substr($arrFiles[$x], strlen($themeDir)+1);
 
 if(isset($_POST['themechange'])){
@@ -17,6 +27,35 @@ if(isset($_POST['fw'])){
     $dt = $_POST['fw'];
     if ($dt == 'enable') shell_exec("uci set neko.cfg.new_interface='1' && uci commit neko");
     if ($dt == 'disable') shell_exec("uci set neko.cfg.new_interface='0' && uci commit neko");
+}
+if(isset($_POST['neko'])){
+    $dt = $_POST['neko'];
+    if ($dt == 'update'){
+        updateNeko();
+    }
+}
+function updateNeko(){
+    $neko_latest = exec("curl -m 5 -f -s https://raw.githubusercontent.com/nosignals/openwrt-neko/main/luci-app-neko/Makefile | grep PKG_VERSION: | cut -d= -f2");
+    if(!empty($neko_latest)){
+        $url_update = "https://github.com/nosignals/openwrt-neko/releases/download/luci-app-neko_".$neko_latest."/luci-app-neko_".$neko_latest."_all.ipk";
+        $str_update = <<<EOF
+        #/bin/bash
+        wget -O /tmp/neko.ipk $url_update
+        cd /tmp
+        opkg remove luci-app-neko
+        opkg install neko.ipk
+        EOF;
+        echo "<h1>UPDATING NEKO TO VERSION ".$neko_latest."</br>";
+        echo "DONT CLOSE THIS TAB</br></h1>";
+        echo "if in 30s not showing notification, you can try again update";
+        file_put_contents('/tmp/neko_update', $str_update);
+        exec("chmod +x /tmp/neko_update");
+        shell_exec("/tmp/neko_update");
+        echo "<h1>Done Updating, Please reload this tab</h1>";
+    }
+    else{
+        echo "<h1>Check your Internet Connection!!!.</h1>";
+    }
 }
 $fwstatus=shell_exec("uci get neko.cfg.new_interface");
 ?>
@@ -88,7 +127,9 @@ $fwstatus=shell_exec("uci get neko.cfg.new_interface");
                             <div class="form-control text-center" id="cliver">-</div>
                         </td>
                         <td class="col-1">
-                            <a class="btn btn-danger col-10" target="_blank" href="https://github.com/nosignals/openwrt-neko/releases">Update</a>
+                            <form action="settings.php" method="post">
+                                <button type="submit" name="neko" value="update" class="btn btn-danger <?php if($stat==0) echo "disabled " ?>col-10">Update</button>
+                            </form>
                         </td>
                     </tr>
                     <tr>
