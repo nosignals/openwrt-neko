@@ -9,6 +9,7 @@ if(isset($_POST['neko'])){
     if ($dt == 'start') shell_exec("$neko_dir/core/neko -s");
     if ($dt == 'disable') shell_exec("$neko_dir/core/neko -k");
     if ($dt == 'restart') shell_exec("$neko_dir/core/neko -r");
+    if ($dt == 'clear') shell_exec("echo \"Logs has been cleared...\" > $neko_dir/tmp/neko_log.txt");
 }
 $neko_status=exec("uci -q get neko.cfg.enabled");
 ?>
@@ -128,6 +129,11 @@ $neko_status=exec("uci -q get neko.cfg.enabled");
             <div class="mb-3">
             </br>
                 <textarea class="form-control" id="bin_logs" rows="10" readonly></textarea>
+            </div>
+            <div class="text-center justify-content-md-center d-grid mb-3">
+                <form action="index.php" method="post">
+                    <button type="submit" name="neko" value="clear" class="btn btn-success d-grid">Clear Log</button>
+                </form>
             </div>
         </div>
     </div>
