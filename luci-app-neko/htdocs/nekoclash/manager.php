@@ -38,7 +38,7 @@ function create_modal($path) {
     $file_name = explode(".", $file_info[4]);
     $out_modal = "";
     $out_modal .= "<div class=\"modal fade\" data-bs-keyboard=\"false\" id=\"".$file_dir."_".$file_name[0]."\" tabindex=\"1\" aria-labelledby=\"modal_".$file_dir."_".$file_name[0]."\" aria-hidden=\"true\">\n";
-    $out_modal .= "        <div class=\"modal-dialog modal-xl\">\n";
+    $out_modal .= "        <div class=\"modal-dialog modal-xl modal-fullscreen-md-down\">\n";
     $out_modal .= "          <div class=\"modal-content\">\n";
     $out_modal .= "            <div class=\"modal-header\">\n";
     $out_modal .= "              <h5 class=\"modal-title\" id=\"modal_".$file_dir."_".$file_name[0]."\">File Information</h5>\n";
@@ -49,7 +49,7 @@ function create_modal($path) {
     $out_modal .= "              <a>Name : ".$file_info[4]."</a></br>\n";
     $out_modal .= "              <a>File Size : ".formatSize(filesize($file))."</a></br>\n";
     $out_modal .= "              <a>Last Modified : ".date('Y-m-d H:i:s', ((7*3600)+filemtime($file)))."</a></br>\n";
-    $out_modal .= "              <div class=\"col input-group mb-3 justify-content-md-center\">\n";
+    $out_modal .= "              <div class=\"col input-group justify-content-md-center\">\n";
     $out_modal .= "                <textarea class=\"form-control\" name=\"form_".$file_dir."_".$file_name[0]."\" rows=\"15\">".shell_exec("cat $file")."</textarea>\n";
     $out_modal .= "              </div>\n";
     $out_modal .= "            </div>\n";
