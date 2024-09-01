@@ -40,7 +40,7 @@ logs() {
 }
 
 neko_checknewver(){
-    new_version=$(curl -m 5 -f -s https://raw.githubusercontent.com/nosignals/neko/luci-app-neko/neko_version)
+    new_version=$(curl -m 5 -f -s https://raw.githubusercontent.com/nosignals/openwrt-neko/main/luci-app-neko/Makefile | grep PKG_VERSION: | cut -d= -f2)
     if [ $neko_version = $new_version ] || [ -z $new_version ]; then
         strversion="- Latest"
     else

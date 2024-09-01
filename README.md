@@ -23,9 +23,24 @@ Packages list
 ---
 | Packages | Version | Arch | Information |
 |---|---|---|---|
-| [luci-app-neko](https://github.com/nosignals/openwrt-neko/tree/main/luci-app-neko) | ` 1.2.0-beta ` | <div align="center"> [all-generic](https://github.com/nosignals/neko/tree/luci-app-neko) </div> | Include `geosite` and `geoip` files |
-| [mihomo](https://github.com/nosignals/openwrt-neko/tree/main/mihomo) | ` 1.18.7-1 ` | <div align="center"> [x86](https://github.com/nosignals/neko/tree/luci-app-neko)</br>[aarch64-generic](https://github.com/nosignals/neko/tree/luci-app-neko) </div> | Latest stable version on [MetaCubeXD](https://github.com/MetaCubeX/mihomo/) |
+| [luci-app-neko](https://github.com/nosignals/openwrt-neko/tree/main/luci-app-neko) | ` 1.2.1-beta ` | <div align="center"> [all-generic](https://github.com/nosignals/openwrt-neko/releases/download/luci-app-neko_1.2.1-beta/luci-app-neko_1.2.1-beta_all.ipk) </div> | Include `geosite` and `geoip` files |
+| [mihomo](https://github.com/nosignals/openwrt-neko/tree/main/mihomo) | ` 1.18.7-1 ` | <div align="center"> [x86](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.7/mihomo_1.18.7-1_x86_64.ipk)</br>[aarch64-generic](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.7/mihomo_1.18.7-1_aarch64_generic.ipk)</br>[arm_cortex-a7_neon](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.7/mihomo_1.18.7-1_arm_cortex-a7_neon-vfpv4.ipk) </div> | Latest stable version on [MetaCubeXD](https://github.com/MetaCubeX/mihomo/) |
 | ? | ? | ? | ? |
+
+Installation
+---
+1. Downloads ` mihomo_xxxx.ipk ` and ` luci-app-neko_xxx.ipk ` from releases
+2. install requirement depedencies `php8, php8-cgi, kmod-tun, bash, curl, jq, ip-full, ca-bundle`
+3. Install firstly ` mihomo_xxxx.ipk `
+4. After installing ` mihomo `, install ` luci-app-neko_xxx.ipk `
+5. Done, check your LUCI on openwrt
+
+Updating
+---
+1. Download updated `mihomo` or `luci-app-neko`
+2. Remove old version `opkg remove luci-app-neko`
+3. Installing downloaded update ` opkg install luci-app-neko_xxx.ipk `
+4. Done, check your LUCI on openwrt
 
 Compiling
 ---

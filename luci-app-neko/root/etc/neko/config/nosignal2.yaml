@@ -68,23 +68,36 @@ tcp-concurrent: true
 dns:
   enable: true
   ipv6: false
+  respect-rules: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - '*.lan'
-  #listen: 127.0.0.1:5053
   default-nameserver:
-    - 8.8.8.8
+    - 223.5.5.5
+    - udp://223.5.5.5
     - 1.1.1.1
+    - 8.8.8.8
   nameserver:
-    - 'tls://dns.google#proxy'
-  fallback:
-    - tls://8.8.4.4
-    - tls://1.1.1.1
+    - 1.1.1.1
+    - 8.8.8.8
+    - quic://dns.adguard.com:784
+    - https://dns.adguard.com/dns-query
+    - tls://dns.adguard.com
+    - 223.5.5.5
+    - udp://223.5.5.5
   proxy-server-nameserver:
-    - https://1.1.1.1/dns-query
+    - 1.1.1.1
+    - 8.8.8.8
+    - quic://dns.adguard.com:784
+    - https://dns.adguard.com/dns-query
+    - tls://dns.adguard.com
+    - 223.5.5.5
+    - udp://223.5.5.5
+  fake-ip-filter:
+    - '*'
+    - '*.lan'
   fallback-filter:
-    geoip: false
+    geoip: true
+    geoip-code: ID
     ipcidr:
     - 0.0.0.0/8
     - 10.0.0.0/8
@@ -102,6 +115,19 @@ dns:
     - 224.0.0.0/4
     - 240.0.0.0/4
     - 255.255.255.255/32
+    domain:
+    - +.google.com
+    - +.facebook.com
+    - +.fbcdn.net
+    - +.ggpht.com
+    - +.youtube.com
+    - +.githubusercontent.com
+    - +.googlevideo.com
+    - +.msftconnecttest.com
+    - +.msftncsi.com
+    - msftconnecttest.com
+    - msftncsi.com
+    - +.*
 ipv6: false
 profile:
   store-selected: true
