@@ -44,6 +44,7 @@ function updateNeko(){
         cd /tmp
         opkg remove luci-app-neko
         opkg install neko.ipk
+        rm -r /tmp/neko.ipk
         EOF;
         echo "<h1>UPDATING NEKO TO VERSION ".$neko_latest."</br>";
         echo "DONT CLOSE THIS TAB</br></h1>";
@@ -52,6 +53,7 @@ function updateNeko(){
         exec("chmod +x /tmp/neko_update");
         shell_exec("/tmp/neko_update");
         echo "<h1>Done Updating, Please reload this tab</h1>";
+        shell_exec("rm /tmp/neko_update");
     }
     else{
         echo "<h1>Check your Internet Connection!!!.</h1>";
