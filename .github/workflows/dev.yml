@@ -35,7 +35,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: dev
 
       - name: Preparing Theme
         run: |
