@@ -23,8 +23,8 @@ Packages list
 ---
 | Packages | Version | Arch | Information |
 |---|---|---|---|
-| [luci-app-neko](https://github.com/nosignals/openwrt-neko/tree/main/luci-app-neko) | ` 1.2.1-beta ` | <div align="center"> [all-generic](https://github.com/nosignals/openwrt-neko/releases/download/luci-app-neko_1.2.1-beta/luci-app-neko_1.2.1-beta_all.ipk) </div> | Include `geosite` and `geoip` files |
-| [mihomo](https://github.com/nosignals/openwrt-neko/tree/main/mihomo) | ` 1.18.7-1 ` | <div align="center"> [x86](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.7/mihomo_1.18.7-1_x86_64.ipk)</br>[aarch64-generic](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.7/mihomo_1.18.7-1_aarch64_generic.ipk)</br>[arm_cortex-a7_neon](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.7/mihomo_1.18.7-1_arm_cortex-a7_neon-vfpv4.ipk) </div> | Latest stable version on [MetaCubeXD](https://github.com/MetaCubeX/mihomo/) |
+| [luci-app-neko](https://github.com/nosignals/openwrt-neko/tree/main/luci-app-neko) | ` 1.2.2-beta ` | <div align="center"> [all-generic](https://github.com/nosignals/openwrt-neko/releases/download/luci-app-neko_1.2.2-beta/luci-app-neko_1.2.2-beta_all.ipk) </div> | Include `geosite` and `geoip` files |
+| [mihomo](https://github.com/nosignals/openwrt-neko/tree/main/mihomo) | ` 1.18.8-2 ` | <div align="center"> [x86](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.8/mihomo_1.18.8-2_x86_64.ipk)</br>[aarch64-generic](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.8/mihomo_1.18.8-2_aarch64_generic.ipk)</br>[arm_cortex-a7_neon](https://github.com/nosignals/openwrt-neko/releases/download/mihomo_1.18.8/mihomo_1.18.8-2_arm_cortex-a7_neon-vfpv4.ipk) </div> | Latest stable version on [MetaCubeXD](https://github.com/MetaCubeX/mihomo/) |
 | ? | ? | ? | ? |
 
 Installation
